@@ -708,40 +708,42 @@ export default function TableSamagraChart<D extends DataRecord = DataRecord>(
   const filterKeys = Object.keys(crossFilterKeys);
   return (
     <Styles>
-      {filterKeys?.length && (
-        <div>
-          {filterKeys.map(item => (
-            <Button
-              type="link"
-              onClick={() => toggleFilter(item, crossFilterKeys[item])}
-            >
-              {crossFilterKeys[item]}
-            </Button>
-          ))}
-        </div>
-      )}
+      <div className="check-update">
+        {filterKeys?.length && (
+          <div>
+            {filterKeys.map(item => (
+              <Button
+                type="link"
+                onClick={() => toggleFilter(item, crossFilterKeys[item])}
+              >
+                {crossFilterKeys[item]}
+              </Button>
+            ))}
+          </div>
+        )}
 
-      <DataTable<D>
-        columns={columns}
-        data={data}
-        rowCount={rowCount}
-        tableClassName="table table-striped table-condensed"
-        pageSize={pageSize}
-        serverPaginationData={serverPaginationData}
-        pageSizeOptions={pageSizeOptions}
-        width={widthFromState}
-        height={heightFromState}
-        serverPagination={serverPagination}
-        onServerPaginationChange={handleServerPaginationChange}
-        onColumnOrderChange={() => setColumnOrderToggle(!columnOrderToggle)}
-        // 9 page items in > 340px works well even for 100+ pages
-        maxPageItemCount={width > 340 ? 9 : 7}
-        noResults={getNoResultsMessage}
-        searchInput={includeSearch && SearchInput}
-        selectPageSize={pageSize !== null && SelectPageSize}
-        // not in use in Superset, but needed for unit tests
-        sticky={sticky}
-      />
+        <DataTable<D>
+          columns={columns}
+          data={data}
+          rowCount={rowCount}
+          tableClassName="table table-striped table-condensed"
+          pageSize={pageSize}
+          serverPaginationData={serverPaginationData}
+          pageSizeOptions={pageSizeOptions}
+          width={widthFromState}
+          height={heightFromState}
+          serverPagination={serverPagination}
+          onServerPaginationChange={handleServerPaginationChange}
+          onColumnOrderChange={() => setColumnOrderToggle(!columnOrderToggle)}
+          // 9 page items in > 340px works well even for 100+ pages
+          maxPageItemCount={width > 340 ? 9 : 7}
+          noResults={getNoResultsMessage}
+          searchInput={includeSearch && SearchInput}
+          selectPageSize={pageSize !== null && SelectPageSize}
+          // not in use in Superset, but needed for unit tests
+          sticky={sticky}
+        />
+      </div>
     </Styles>
   );
 }
